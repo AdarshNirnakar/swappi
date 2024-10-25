@@ -1,5 +1,6 @@
 const { hashpassword, comparePassword } = require('../helper/authHelper')
 const userModel = require('../module/User');
+const requestModel =require('../module/Request');
 const JWT = require('jsonwebtoken')
 
 const registerController = async(req,res) => {
@@ -57,11 +58,35 @@ const loginController=async(req,res)=>{
     }
 }
 
-const testController = async(req,res)=>{
-    res.send("hello middelware is working")
-}
+// const testController = async(req,res)=>{
+//     res.send("hello middelware is working")
+// }
 
-const requestController=async(req,res)=>{
-    
-}
-module.exports=  {registerController,loginController,testController} 
+// const requestController=async(req,res)=>{ 
+//     try { 
+//         const {request,offers}=req.body 
+//         if(!request){ 
+//             return res.send({message:"plz fill the discription "}) 
+//         } 
+//         if(!offers){ 
+//             return res.send({message:"offer's cannot be kept empty"}) 
+//         } 
+        
+//         // Assuming user details are available in req.user
+//         const user = req.user; // Extract user details from the request
+
+//         // Save the request and offers to the database
+//         const newRequest = await requestModel.create({ request, offers, user: user._id });
+//         res.status(201).send({ 
+//             message: "Request created successfully", 
+//             newRequest, 
+//             user: { name: user.name, email: user.email } // Include user details in the response
+//         });
+        
+//     } catch (error) { 
+//         console.log(error) 
+//         res.status(500).send({ message: "Internal Server Error", error }); 
+//     } 
+// }
+
+module.exports=  {registerController,loginController} 
