@@ -1,24 +1,19 @@
-const requestModel = require('../module/Request');
-
+const requestModel = require('../module/Request'); 
 const requestController = async (req, res) => {
     try {
-        const { offers, description } = req.body; // Corrected to 'description'
-        if (!offers) {
-            return res.status(400).send({ message: "Offers cannot be kept empty" });
-        }
-        if (!description) { // Check for description
-            return res.status(400).send({ message: "Description is required" }); // Corrected message
+        const { title, type, reward, description } = req.body; 
+
+        if (!title || !description) {
+            return res.status(400).send({ message: "Title and description are required" });
         }
 
-        // Assuming user details are available in req.user
-        const user = req.user; // Extract user details from the request
+        const user = req.user; 
 
-        // Save the request and offers to the database
-        const newRequest = await requestModel.create({ offers, description }); // Include description
+        const newRequest = await requestModel.create({ title, type, reward, description }); 
         res.status(201).send({
             message: "Request created successfully",
             newRequest,
-            // user: { name: user.name, email: user.email } // Include user details in the response
+            
         });
 
     } catch (error) {
@@ -30,4 +25,13 @@ const requestController = async (req, res) => {
     }
 }
 
-module.exports = { requestController };
+const getAllRequestsController = async (req, res) => {
+    try {
+        const requests = await requestModel.find(); 
+        res.status(200).json(requests);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching requests', error }); 
+    }
+}
+
+module.exports = { requestController, getAllRequestsController };

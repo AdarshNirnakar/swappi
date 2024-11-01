@@ -1,13 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const {registerController,loginController} = require('../controller/authController');
-const {requestController} =require('../controller/workDetailsController')
-const requireSignIn = require('../middlewares/authMiddleware');
+const { registerController, loginController } = require('../controller/authController');
+const { requestController, getAllRequestsController } = require('../controller/workDetailsController'); 
+const requireSignIn = require('../middlewares/authMiddleware'); 
 
-
+// Route for user registration
 router.post('/register', registerController);
-router.post('/login',loginController);
 
-router.post('/request',requestController)
+// Route for user login
+router.post('/login', loginController);
+
+// Route for handling requests
+router.post('/request', requestController); 
+
+// Route to see all the requests
+router.get('/requests', getAllRequestsController); 
 
 module.exports = router;
