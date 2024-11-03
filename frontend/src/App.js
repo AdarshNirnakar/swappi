@@ -5,8 +5,6 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Login from './components/Login';
 import Register from './components/Register';
 import Home from './components/Home';
-import Profile from './components/Profile';
-import Chat from './components/Chat';
 
 function App() {
   return (
@@ -15,8 +13,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/chat" element={<Chat />} />
         <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
@@ -24,4 +20,3 @@ function App() {
 }
 
 export default App;
-

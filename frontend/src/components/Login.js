@@ -1,3 +1,5 @@
+// frontend/src/components/Login.js
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,6 +23,7 @@ function Login() {
       const data = await response.json();
 
       if (response.ok) {
+        localStorage.setItem('authToken', data.token); // Save the token
         navigate('/home'); 
       } else {
         setError(data.message || 'Login failed. Please check your credentials.');
@@ -58,17 +61,9 @@ function Login() {
           >
             Login
           </button>
-          {error && <div className="mt-4 text-red-500 text-center">{error}</div>}
-          <div className="mt-4 text-center">
-            <span>Don't have an account? </span>
-            <button 
-              onClick={() => navigate('/register')} 
-              className="text-red-600 hover:underline"
-            >
-              Register
-            </button>
-          </div>        
         </form>
+        {error && <p className="text-red-500 text-center mt-4">{error}</p>}
+        <p className="text-center mt-4">Don't have an account? <a href="/register" className="text-red-600">Register here</a></p>
       </div>
     </div>
   );
